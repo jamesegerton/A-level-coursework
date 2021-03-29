@@ -6,27 +6,26 @@
 <?php
 	include_once('connection.php');
 	array_map("htmlspecialchars", $_POST);
-	switch($_POST["role"]){
+	switch($_POST["Dog_size"]){
 		case "small":
-			$role=0;
+			$Dog_size=0;
 			break;
 			case "medium":
-			$role=1;
+			$Dog_size=1;
 			break;
 		case "big":
-			$role=2;
+			$Dog_size=2;
 			break;
 	}
-	$stmt = $conn->prepare("INSERT INTO dogs1 (UserID,Dog_Name,Dog_Breed,Special_Needs,Lead,Role)VALUES (NULL,:Dog_Name,:Dog_Breed,:Dog_Size,:Special_Needs,:Lead,:role)");
+	$stmt = $conn->prepare("INSERT INTO dogs1 (DogID,Dog_Name,Dog_Breed,Special_Needs,Lead,Dog_size)VALUES (NULL,:Dog_Name,:Dog_Breed,:Special_Needs,:Lead,:Dog_size)");
 	$stmt->bindParam(':Dog_Name', $_POST["Dog_Name"]);
 	$stmt->bindParam(':Dog_Breed', $_POST["Dog_Breed"]);
-	$stmt->bindParam(':Dog_Size', $_POST["Dog_Size"]);
 	$stmt->bindParam(':Lead', $_POST["Lead"]);
     $stmt->bindParam(':Special_Needs', $_POST["Special_Needs"]);
-	$stmt->bindParam(':role', $role);
+	$stmt->bindParam(':Dog_size', $Dog_size);
 	$stmt->execute();
 $conn=null;
 ?>
-
+               
 </body>
 </html>
